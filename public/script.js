@@ -213,3 +213,17 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+
+// people cannot see the page source 
+// Right-click disable karne ke liye
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+// Inspect shortcut (F12, Ctrl+Shift+I, Ctrl+U) block karne ke liye
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 123 || 
+        (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || 
+        (event.ctrlKey && event.keyCode === 85)) {
+        event.preventDefault();
+    }
+});
