@@ -3,10 +3,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from public folder
+// Static files (CSS, Images, JS) ke liye public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Explicit Routes for all pages
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -35,12 +34,11 @@ app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'contact.html'));
 });
 
-// Ye check karega ki agar app local run ho rahi hai tabhi app.listen chale
+// Local ke liye listen aur Vercel ke liye export
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   });
 }
 
-// Vercel ke liye app export karna zaroori hai
 module.exports = app;
