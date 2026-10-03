@@ -1,5 +1,13 @@
 {
   "framework": null,
   "outputDirectory": "public",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/solutions", "destination": "/solutions.html" },
+    { "source": "/people", "destination": "/people.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/contact", "destination": "/contact.html" }
+  ]
 }
