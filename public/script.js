@@ -276,3 +276,110 @@ document.addEventListener('keydown', function(event) {
     io.observe(el);
   });
 })();
+
+// matumhum script
+        (function () {
+            var items = Array.prototype.slice.call(document.querySelectorAll('#actGallery .act-item'));
+            var box = document.getElementById('actLightbox');
+            var img = document.getElementById('actLbImg');
+            var current = 0;
+
+            function show(i) {
+                current = (i + items.length) % items.length;
+                var src = items[current].querySelector('img');
+                img.src = src.currentSrc || src.src;
+                img.alt = src.alt;
+            }
+            function open(i) { show(i); box.classList.add('open'); document.body.style.overflow = 'hidden'; }
+            function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+
+            items.forEach(function (el, i) {
+                el.addEventListener('click', function () { open(i); });
+                el.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+                });
+            });
+
+            document.getElementById('actClose').addEventListener('click', close);
+            document.getElementById('actPrev').addEventListener('click', function () { show(current - 1); });
+            document.getElementById('actNext').addEventListener('click', function () { show(current + 1); });
+            box.addEventListener('click', function (e) { if (e.target === box) close(); });
+
+            document.addEventListener('keydown', function (e) {
+                if (!box.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowLeft') show(current - 1);
+                if (e.key === 'ArrowRight') show(current + 1);
+            });
+        })();
+
+        // getaway 24 styling 
+        (function () {
+            var items = Array.prototype.slice.call(document.querySelectorAll('#actGallery .act-item'));
+            var box = document.getElementById('actLightbox');
+            var img = document.getElementById('actLbImg');
+            var current = 0;
+
+            function show(i) {
+                current = (i + items.length) % items.length;
+                var src = items[current].querySelector('img');
+                img.src = src.currentSrc || src.src;
+                img.alt = src.alt;
+            }
+            function open(i) { show(i); box.classList.add('open'); document.body.style.overflow = 'hidden'; }
+            function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+
+            items.forEach(function (el, i) {
+                el.addEventListener('click', function () { open(i); });
+                el.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+                });
+            });
+
+            document.getElementById('actClose').addEventListener('click', close);
+            document.getElementById('actPrev').addEventListener('click', function () { show(current - 1); });
+            document.getElementById('actNext').addEventListener('click', function () { show(current + 1); });
+            box.addEventListener('click', function (e) { if (e.target === box) close(); });
+
+            document.addEventListener('keydown', function (e) {
+                if (!box.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowLeft') show(current - 1);
+                if (e.key === 'ArrowRight') show(current + 1);
+            });
+        })();
+
+                (function () {
+            var items = Array.prototype.slice.call(document.querySelectorAll('.act-item'));
+            var box = document.getElementById('actLightbox');
+            var img = document.getElementById('actLbImg');
+            var current = 0;
+
+            function show(i) {
+                current = (i + items.length) % items.length;
+                var src = items[current].querySelector('img');
+                img.src = src.currentSrc || src.src;
+                img.alt = src.alt;
+            }
+            function open(i) { show(i); box.classList.add('open'); document.body.style.overflow = 'hidden'; }
+            function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+
+            items.forEach(function (el, i) {
+                el.addEventListener('click', function () { open(i); });
+                el.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+                });
+            });
+
+            document.getElementById('actClose').addEventListener('click', close);
+            document.getElementById('actPrev').addEventListener('click', function () { show(current - 1); });
+            document.getElementById('actNext').addEventListener('click', function () { show(current + 1); });
+            box.addEventListener('click', function (e) { if (e.target === box) close(); });
+
+            document.addEventListener('keydown', function (e) {
+                if (!box.classList.contains('open')) return;
+                if (e.key === 'Escape') close();
+                if (e.key === 'ArrowLeft') show(current - 1);
+                if (e.key === 'ArrowRight') show(current + 1);
+            });
+        })();
