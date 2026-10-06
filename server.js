@@ -3,6 +3,14 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Ye middleware har response me server ki info bhejega
+app.use((req, res, next) => {
+    res.setHeader('X-Powered-By', 'Node.js / Express');
+    next();
+});
+
+// Baaki tera code yahan aayega...
+
 // Static files (CSS, Images, JS) ke liye public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,3 +50,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = app;
+
+const express = require('express');
+const app = express();
+
