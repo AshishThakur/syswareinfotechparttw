@@ -155,56 +155,162 @@ img { max-width: 100%; }
 .btn-expert:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 
 /* Form card */
+/* Transparent Hero Background Matching Glassmorphism Form Card */
 .hero-form-card {
-  flex: 0 1 460px; background: #fff; color: #000; padding: 40px 36px; border-radius: 20px;
-  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.7), 0 0 70px rgba(37, 99, 235, 0.28);
+  flex: 0 1 460px;
+  background: rgba(13, 20, 35, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #ede8dc;
+  padding: 40px 36px;
+  border-radius: 20px;
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.85), 0 0 50px rgba(14, 165, 233, 0.15);
 }
-.form-header { margin-bottom: 28px; }
-.form-header h3 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #000; margin-bottom: 6px; }
-.form-header p { font-size: 14px; color: #6b6b6b; }
-.form-row { display: flex; gap: 12px; margin-bottom: 14px; }
-.form-row .input-box { flex: 1; }
-.form-group { margin-bottom: 14px; }
-.input-box { position: relative; width: 100%; }
 
-.hero-form-card input, .hero-form-card textarea {
-  width: 100%; padding: 15px 14px; background: #f5f7fb; border: 1px solid #e2e8f2;
-  border-radius: 10px; font-size: 14px; color: #000; outline: none;
+.form-header {
+  margin-bottom: 28px;
+}
+
+.form-header h3 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text, #ede8dc);
+  margin-bottom: 6px;
+}
+
+.form-header p {
+  font-size: 14px;
+  color: var(--text-dim, #a39f94);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.form-row .input-box {
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.input-box {
+  position: relative;
+  width: 100%;
+}
+
+.hero-form-card input, 
+.hero-form-card textarea {
+  width: 100%;
+  padding: 15px 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  font-size: 14px;
+  color: #ede8dc;
+  outline: none;
   transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
-.hero-form-card textarea { resize: none; }
-.input-box label {
-  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-  font-size: 13.5px; color: #8a8a8a; pointer-events: none; transition: all 0.2s ease;
+
+.hero-form-card textarea {
+  resize: none;
 }
-.textarea-box label { top: 20px; transform: none; }
+
+.input-box label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13.5px;
+  color: #8a8a8a;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.textarea-box label {
+  top: 20px;
+  transform: none;
+}
+
 .hero-form-card input:focus ~ label,
 .hero-form-card input:not(:placeholder-shown) ~ label,
 .hero-form-card textarea:focus ~ label,
 .hero-form-card textarea:not(:placeholder-shown) ~ label {
-  top: -8px; transform: none; font-size: 11px; font-weight: 600; color: var(--blue);
-  background: #fff; padding: 0 6px;
+  top: -8px;
+  transform: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: #38bdf8;
+  background: #090e17;
+  padding: 0 6px;
+  border-radius: 4px;
 }
-.hero-form-card input:focus, .hero-form-card textarea:focus {
-  border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+
+.hero-form-card input:focus, 
+.hero-form-card textarea:focus {
+  border-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
+
+/* Original untouched button style */
 .btn-demo {
-  width: 100%; margin-top: 6px; padding: 16px; background: var(--grad); color: #fff;
-  border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+  width: 100%;
+  margin-top: 6px;
+  padding: 16px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.35);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.btn-demo:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -8px rgba(37, 99, 235, 0.75); }
+
+.btn-demo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5);
+}
 
 @media (max-width: 1024px) {
-  .hero-section { padding: 120px 24px 70px; min-height: auto; }
-  .hero-container { flex-direction: column; text-align: center; gap: 48px; }
-  .hero-content p { margin: 0 auto 32px; }
-  .hero-form-card { width: 100%; max-width: 520px; text-align: left; }
+  .hero-section {
+    padding: 120px 24px 70px;
+    min-height: auto;
+  }
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 48px;
+  }
+  .hero-content p {
+    margin: 0 auto 32px;
+  }
+  .hero-form-card {
+    width: 100%;
+    max-width: 520px;
+    text-align: left;
+  }
 }
+
 @media (max-width: 480px) {
-  .hero-section { padding: 100px 16px 50px; }
-  .hero-form-card { padding: 30px 22px; border-radius: 16px; }
-  .form-row { flex-direction: column; gap: 14px; }
+  .hero-section {
+    padding: 100px 16px 50px;
+  }
+  .hero-form-card {
+    padding: 30px 22px;
+    border-radius: 16px;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 14px;
+  }
 }
 
 /* ================= LOGO SLIDER ================= */
