@@ -10570,3 +10570,169 @@ a:hover{text-decoration:underline} */
 
 /* 9. "Solutions In Tune With Your Needs" -> #f1f1f1 */
 [data-theme="light"] .solutions-section.scroll-animate { background: #f1f1f1; }
+
+
+/*  */
+/* =====================================================================
+   LIGHT MODE - ALL INNER PAGES (index.html ko touch nahi karta)
+   Isse style.css ke bilkul END me paste karo (purane light-mode block ke baad).
+   Pattern index jaisa: white / #f1f1f1 alternate bands, hero banners dark,
+   cards (dark/blue) same rahenge.
+   ===================================================================== */
+
+/* ================= ABOUT PAGE ================= */
+/* intro = white (already), expertise = #f1f1f1 */
+[data-theme="light"] .exp-section {
+  background:
+    radial-gradient(900px 420px at 85% 0%, rgba(37, 99, 235, 0.08), transparent 70%),
+    #f1f1f1;
+  color: #0b1220;
+}
+[data-theme="light"] .exp-section-title { color: #0b1220; }
+[data-theme="light"] .exp-section-subtitle { color: #64748b; }
+
+[data-theme="light"] .exp-outer {
+  background: radial-gradient(circle 300px at 0% 0%, rgba(37, 99, 235, 0.4), rgba(203, 213, 225, 0.5));
+}
+[data-theme="light"] .exp-outer:hover {
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.35);
+}
+[data-theme="light"] .exp-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+[data-theme="light"] .exp-card h3 { color: #0b1220; }
+[data-theme="light"] .exp-card p { color: #475569; }
+[data-theme="light"] .exp-ray { opacity: 0.1; }
+[data-theme="light"] .exp-icon-box {
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+
+/* vision = white (mission box dark hi rahega) */
+[data-theme="light"] .vision-section { background-color: #ffffff; }
+
+/* team = #f1f1f1 (profile cards same) */
+[data-theme="light"] .team-section {
+  background:
+    radial-gradient(800px 380px at 50% 0%, rgba(37, 99, 235, 0.08), transparent 70%),
+    #f1f1f1;
+  color: #0b1220;
+}
+[data-theme="light"] .team-header h2 { color: #0b1220; }
+[data-theme="light"] .team-slider-wrapper::before {
+  background: linear-gradient(to right, #f1f1f1, transparent);
+}
+[data-theme="light"] .team-slider-wrapper::after {
+  background: linear-gradient(to left, #f1f1f1, transparent);
+}
+
+/* ================= SERVICES PAGE ================= */
+[data-theme="light"] .svc-white { background: #ffffff; }
+[data-theme="light"] .svc-tint,
+[data-theme="light"] .svc-sky { background: #f1f1f1; }
+
+[data-theme="light"] .svc-dark {
+  background:
+    radial-gradient(900px 440px at 85% 0%, rgba(37, 99, 235, 0.08), transparent 70%),
+    radial-gradient(600px 360px at 0% 100%, rgba(6, 182, 212, 0.07), transparent 70%),
+    #f1f1f1;
+  color: #0b1220;
+}
+[data-theme="light"] .svc-dark::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+[data-theme="light"] .svc-dark .svc-title { color: #0b1220; }
+[data-theme="light"] .svc-audit-banner .svc-title { color: #ffffff; } /* banner dark hi hai */
+[data-theme="light"] .svc-sub { color: #64748b; }
+
+/* ================= SOLUTIONS PAGE ================= */
+[data-theme="light"] .sol-white { background: #ffffff; }
+[data-theme="light"] .sol-tint,
+[data-theme="light"] .sol-sky { background: #f1f1f1; }
+
+[data-theme="light"] .sol-dark {
+  background:
+    radial-gradient(900px 440px at 85% 0%, rgba(37, 99, 235, 0.08), transparent 70%),
+    radial-gradient(600px 360px at 0% 100%, rgba(6, 182, 212, 0.07), transparent 70%),
+    #f1f1f1;
+  color: #0b1220;
+}
+[data-theme="light"] .sol-dark::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+[data-theme="light"] .sol-dark .sol-title { color: #0b1220; }
+[data-theme="light"] .sol-sub { color: #64748b; }
+
+/* dark boxes ke andar title white hi rahe */
+[data-theme="light"] .sol-panel .sol-title,
+[data-theme="light"] .sol-cloud-content .sol-title,
+[data-theme="light"] .sol-surv .sol-title { color: #ffffff; }
+
+/* ================= PEOPLE PAGE ================= */
+/* celebration section already white */
+[data-theme="light"] .people-gallery-section {
+  background:
+    radial-gradient(900px 440px at 85% 0%, rgba(37, 99, 235, 0.08), transparent 70%),
+    radial-gradient(600px 360px at 0% 100%, rgba(6, 182, 212, 0.07), transparent 70%),
+    #f1f1f1;
+  color: #0b1220;
+}
+[data-theme="light"] .people-gallery-section::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+}
+/* tab buttons (active tab ka gradient apne ID-selector se already chalta hai) */
+[data-theme="light"] .pg-tab {
+  background: #ffffff;
+  border-color: #dbe6f7;
+  color: #334155;
+}
+[data-theme="light"] .pg-tab:hover {
+  background: #eef4ff;
+  border-color: rgba(37, 99, 235, 0.55);
+  color: #2563eb;
+}
+
+/* ================= BLOG PAGE ================= */
+[data-theme="light"] .blog-list-section {
+  background:
+    radial-gradient(640px 340px at 0% 0%, rgba(6, 182, 212, 0.06), transparent 70%),
+    radial-gradient(560px 340px at 100% 0%, rgba(37, 99, 235, 0.07), transparent 70%),
+    #f1f1f1;
+}
+
+/* ================= CONTACT PAGE ================= */
+[data-theme="light"] .ct-white { background: #ffffff; }
+[data-theme="light"] .ct-sky {
+  background:
+    radial-gradient(700px 360px at 0% 0%, rgba(37, 99, 235, 0.06), transparent 70%),
+    #f1f1f1;
+}
+
+/* ================= ACTIVITIES / GETAWAY / CELEBRATIONS / TOWNHALL / STAR PERFORMERS ================= */
+[data-theme="light"] .act-section { background: #f1f1f1; }
+[data-theme="light"] .act-month-title { border-bottom-color: #dbe2ee; }
+
+/* ================= STARS OF 2024-25 ================= */
+[data-theme="light"] .stars {
+  background:
+    radial-gradient(900px 400px at 85% -5%, rgba(47, 107, 255, 0.1), transparent 60%),
+    radial-gradient(700px 400px at 0% 40%, rgba(34, 184, 232, 0.07), transparent 60%),
+    #f1f1f1;
+}
+[data-theme="light"] .stars-title { color: #0b1220; }
+[data-theme="light"] .stars__head p { color: #475569; }
+/* .star cards dark hi rahenge, unke andar ka text same */
+
+/* ================= PRIVACY / TERMS / DISCLAIMER ================= */
+[data-theme="light"] .policy { background: #f1f1f1; }
+[data-theme="light"] .toc { background: #ffffff; }
+[data-theme="light"] .toc a:hover { background: #f1f1f1; }
+[data-theme="light"] .block ul ul { background: #f6f8fc; }
