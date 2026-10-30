@@ -1,55 +1,57 @@
-/* =====================================================
-   0. THEME TOGGLE  (moon = dark / default, sun = light)
-   Sabse upar rakha hai taaki neeche kisi script me error
-   aaye to bhi toggle kaam karta rahe.
-   ===================================================== */
+/* ========== Theme toggle (sun / moon) ========== */
 (function () {
   var root = document.documentElement;
-  var KEY = 'theme';
- 
-  function setTheme(mode) {
-    if (mode === 'light') {
-      root.setAttribute('data-theme', 'light');
-    } else {
-      root.removeAttribute('data-theme');
-    }
-    var btn = document.querySelector('.theme-toggle');
-    if (btn) {
-      btn.setAttribute('aria-pressed', mode === 'light' ? 'true' : 'false');
-      btn.title = mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode';
-    }
+
+  // saved theme lagao
+  try {
+    var saved = localStorage.getItem('sw-theme');
+    root.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+  } catch (e) {
+    root.setAttribute('data-theme', 'dark');
   }
- 
-  // page load par saved theme lagao
-  var saved = null;
-  try { saved = localStorage.getItem(KEY); } catch (e) {}
-  setTheme(saved === 'light' ? 'light' : 'dark');
- 
-  // click par toggle
-  document.addEventListener('click', function (e) {
-    var btn = e.target.closest('.theme-toggle');
+
+  function init() {
+    var btn = document.getElementById('themeToggle');
     if (!btn) return;
- 
-    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    setTheme(next);
-    try { localStorage.setItem(KEY, next); } catch (err) {}
-  });
+
+    function sync() {
+      var light = root.getAttribute('data-theme') === 'light';
+      btn.setAttribute('aria-pressed', light);
+      btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+    sync();
+
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.classList.add('theme-transition');
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('sw-theme', next); } catch (e) {}
+      sync();
+      setTimeout(function () { root.classList.remove('theme-transition'); }, 450);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
- 
- 
+
+
 document.addEventListener("DOMContentLoaded", function () {
- 
+
   /* ========== 1. Header scroll + mobile menu ========== */
   var header = document.getElementById("header");
   var hamburger = document.getElementById("hamburger");
   var mobileMenu = document.getElementById("mobileMenu");
- 
+
   if (header) {
     window.addEventListener("scroll", function () {
       header.classList.toggle("scrolled", window.scrollY > 50);
     });
   }
- 
+
   if (hamburger && mobileMenu) {
     hamburger.addEventListener("click", function () {
       hamburger.classList.toggle("active");
@@ -62,21 +64,21 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
- 
+
   /* ========== 2. Custom cursor ========== */
   var cursorDot = document.querySelector("[data-cursor-dot]");
   var cursorOutline = document.querySelector("[data-cursor-outline]");
- 
+
   if (cursorDot && cursorOutline) {
     var mouseX = 0, mouseY = 0, outlineX = 0, outlineY = 0;
- 
+
     window.addEventListener("mousemove", function (e) {
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursorDot.style.left = mouseX + "px";
       cursorDot.style.top = mouseY + "px";
     });
- 
+
     (function animateCursor() {
       outlineX += (mouseX - outlineX) * 0.2;
       outlineY += (mouseY - outlineY) * 0.2;
@@ -85,27 +87,27 @@ document.addEventListener("DOMContentLoaded", function () {
       requestAnimationFrame(animateCursor);
     })();
   }
- 
+
   /* ========== 3. Hero canvas network (blue / cyan) ========== */
   var canvas = document.getElementById("hero-canvas");
- 
+
   if (canvas) {
     var ctx = canvas.getContext("2d");
     var points = [];
     var mouse = { x: null, y: null, radius: 170 };
- 
+
     window.addEventListener("mousemove", function (e) {
       var rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     });
     window.addEventListener("mouseout", function () { mouse.x = null; mouse.y = null; });
- 
+
     function resizeCanvas() {
       canvas.width = canvas.parentElement.offsetWidth;
       canvas.height = canvas.parentElement.offsetHeight;
     }
- 
+
     function CyberDot() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
@@ -117,13 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
       this.density = Math.random() * 22 + 10;
       this.color = Math.random() > 0.3 ? "#60a5fa" : "#22d3ee";
     }
- 
+
     CyberDot.prototype.update = function () {
       this.baseX += this.vx;
       this.baseY += this.vy;
       if (this.baseX < 0 || this.baseX > canvas.width) this.vx = -this.vx;
       if (this.baseY < 0 || this.baseY > canvas.height) this.vy = -this.vy;
- 
+
       if (mouse.x !== null && mouse.y !== null) {
         var dx = mouse.x - this.x;
         var dy = mouse.y - this.y;
@@ -139,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
       this.x += (this.baseX - this.x) * 0.07;
       this.y += (this.baseY - this.y) * 0.07;
     };
- 
+
     CyberDot.prototype.draw = function () {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -148,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
       ctx.fill();
       ctx.globalAlpha = 1;
     };
- 
+
     function initDots() {
       resizeCanvas();
       points = [];
@@ -156,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
       count = Math.min(Math.max(count, 40), 90);
       for (var i = 0; i < count; i++) points.push(new CyberDot());
     }
- 
+
     function animateNetwork() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (var i = 0; i < points.length; i++) {
@@ -178,12 +180,12 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       requestAnimationFrame(animateNetwork);
     }
- 
+
     initDots();
     window.addEventListener("resize", initDots);
     animateNetwork();
   }
- 
+
   /* ========== 4. Logo marquee: duplicate set for seamless loop ========== */
   var track = document.getElementById("marqueeTrack");
   if (track) {
@@ -195,12 +197,11 @@ document.addEventListener("DOMContentLoaded", function () {
       track.appendChild(clone);
     });
   }
- 
+
   /* ========== 5. Cyber cards 3D tilt ========== */
   document.querySelectorAll(".cyber-solutions-section .container").forEach(function (box) {
     var card = box.querySelector(".card");
-    if (!card) return;
- 
+
     box.addEventListener("mousemove", function (e) {
       var r = box.getBoundingClientRect();
       var x = (e.clientX - r.left) / r.width - 0.5;
@@ -208,13 +209,13 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.transition = "transform 120ms ease-out, box-shadow 400ms ease, border-color 400ms ease";
       card.style.transform = "rotateX(" + (-y * 14) + "deg) rotateY(" + (x * 14) + "deg)";
     });
- 
+
     box.addEventListener("mouseleave", function () {
       card.style.transition = "transform 600ms ease, box-shadow 400ms ease, border-color 400ms ease";
       card.style.transform = "";
     });
   });
- 
+
   /* ========== 6. Scroll animation (solutions section) ========== */
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
@@ -224,19 +225,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }, { threshold: 0.15 });
- 
+
   document.querySelectorAll(".scroll-animate").forEach(function (el) { io.observe(el); });
- 
+
   /* ========== 7. Counters ========== */
   document.querySelectorAll(".counter").forEach(function (el) {
     var target = +el.dataset.target;
     var suffix = el.dataset.suffix || "";
- 
+
     var co = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         co.disconnect();
- 
+
         var start = null;
         function step(t) {
           if (!start) start = t;
@@ -248,31 +249,31 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(step);
       });
     }, { threshold: 0.5 });
- 
+
     co.observe(el);
   });
- 
+
 });
- 
- 
-// people cannot see the page source
+
+
+// people cannot see the page source 
 // Right-click disable karne ke liye
-document.addEventListener('contextmenu', function (event) { event.preventDefault(); });
- 
+document.addEventListener('contextmenu', event => event.preventDefault());
+
 // Inspect shortcut (F12, Ctrl+Shift+I, Ctrl+U) block karne ke liye
-document.addEventListener('keydown', function (event) {
-  if (event.keyCode === 123 ||
-    (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) ||
-    (event.ctrlKey && event.keyCode === 85)) {
-    event.preventDefault();
-  }
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 123 || 
+        (event.ctrlKey && event.shiftKey && (event.keyCode === 73 || event.keyCode === 74)) || 
+        (event.ctrlKey && event.keyCode === 85)) {
+        event.preventDefault();
+    }
 });
- 
- 
+
+
 // about us code
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- 
+
   /* Team slider: cards ka duplicate set banao taaki loop seamless rahe */
   var track = document.querySelector('.team-slider');
   if (track && !reduce) {
@@ -285,24 +286,24 @@ document.addEventListener('keydown', function (event) {
       track.appendChild(copy);
     });
   }
- 
+
   /* Scroll reveal (fade up) */
   var items = document.querySelectorAll('.reveal');
- 
+
   items.forEach(function (el) {
     var siblings = Array.prototype.filter.call(el.parentElement.children, function (c) {
       return c.classList.contains('reveal');
     });
     el.style.setProperty('--d', Math.min(siblings.indexOf(el), 5) * 90 + 'ms');
   });
- 
+
   if (reduce || !('IntersectionObserver' in window)) {
     items.forEach(function (el) {
       el.classList.add('is-visible');
     });
     return;
   }
- 
+
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -311,58 +312,48 @@ document.addEventListener('keydown', function (event) {
       }
     });
   }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
- 
+
   items.forEach(function (el) {
     io.observe(el);
   });
 })();
- 
- 
-// Activities / Getaway / Celebrations / Townhall / Star performer: lightbox
-// (pehle 3 baar copy-paste tha, ab ek hi block hai aur sirf un pages par chalta hai
-//  jahan lightbox maujood hai, isliye baaki pages par error nahi aata)
+
+
+// activities / getaway / celebrations pages - gallery lightbox
+// (sirf un pages par chalta hai jahan lightbox hai, baaki pages par error nahi aayega)
 (function () {
-  var box = document.getElementById('actLightbox');
-  if (!box) return;
- 
   var items = Array.prototype.slice.call(document.querySelectorAll('.act-item'));
+  var box = document.getElementById('actLightbox');
   var img = document.getElementById('actLbImg');
-  var closeBtn = document.getElementById('actClose');
-  var prevBtn = document.getElementById('actPrev');
-  var nextBtn = document.getElementById('actNext');
+  var btnClose = document.getElementById('actClose');
+  var btnPrev = document.getElementById('actPrev');
+  var btnNext = document.getElementById('actNext');
+
+  if (!items.length || !box || !img || !btnClose || !btnPrev || !btnNext) return;
+
   var current = 0;
- 
-  if (!items.length || !img) return;
- 
+
   function show(i) {
     current = (i + items.length) % items.length;
     var src = items[current].querySelector('img');
-    if (!src) return;
     img.src = src.currentSrc || src.src;
     img.alt = src.alt;
   }
-  function open(i) {
-    show(i);
-    box.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    box.classList.remove('open');
-    document.body.style.overflow = '';
-  }
- 
+  function open(i) { show(i); box.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close() { box.classList.remove('open'); document.body.style.overflow = ''; }
+
   items.forEach(function (el, i) {
     el.addEventListener('click', function () { open(i); });
     el.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
     });
   });
- 
-  if (closeBtn) closeBtn.addEventListener('click', close);
-  if (prevBtn) prevBtn.addEventListener('click', function () { show(current - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { show(current + 1); });
+
+  btnClose.addEventListener('click', close);
+  btnPrev.addEventListener('click', function () { show(current - 1); });
+  btnNext.addEventListener('click', function () { show(current + 1); });
   box.addEventListener('click', function (e) { if (e.target === box) close(); });
- 
+
   document.addEventListener('keydown', function (e) {
     if (!box.classList.contains('open')) return;
     if (e.key === 'Escape') close();
